@@ -34,3 +34,5 @@ All notable changes to ReliefLink are documented here.
 
 - **2026-08-01**: perf: optimize query indexing and memory caching
 
+- **2026-08-02**: refactor: modularize request handler logic
+
