@@ -50,3 +50,5 @@ All notable changes to ReliefLink are documented here.
 
 - **2026-08-05**: docs: update parameter descriptions in documentation
 
+- **2026-08-06**: perf: optimize query indexing and memory caching
+
