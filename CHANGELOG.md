@@ -68,3 +68,5 @@ All notable changes to ReliefLink are documented here.
 
 - **2026-08-10**: test: add unit tests for priority scoring
 
+- **2026-08-11**: docs: update parameter descriptions in documentation
+
