@@ -72,3 +72,5 @@ All notable changes to ReliefLink are documented here.
 
 - **2026-08-12**: style: format code according to style conventions
 
+- **2026-08-12**: perf: optimize query indexing and memory caching
+
