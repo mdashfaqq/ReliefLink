@@ -74,3 +74,5 @@ All notable changes to ReliefLink are documented here.
 
 - **2026-08-12**: perf: optimize query indexing and memory caching
 
+- **2026-08-13**: fix: validate boundary conditions on input fields
+
