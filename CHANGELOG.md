@@ -76,3 +76,5 @@ All notable changes to ReliefLink are documented here.
 
 - **2026-08-13**: fix: validate boundary conditions on input fields
 
+- **2026-08-14**: feat: add telemetry metrics and health check probes
+
