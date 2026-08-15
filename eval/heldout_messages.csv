@@ -1,0 +1,33 @@
+text,category,level
+"Our colony is under water, my uncle is stuck in his house and can't swim",rescue,CRITICAL
+"Grandpa collapsed in the bathroom and is not responding",medical,CRITICAL
+"We ran out of food yesterday, there are 9 of us",food,HIGH
+"Could someone bring drinking water to the temple hall, 50 people here",water,HIGH
+"Need a few mats and blankets for the night",shelter,LOW
+"The river overflowed and a family is on the roof of their shed",rescue,CRITICAL
+"My wife is 8 months pregnant and has started bleeding",medical,CRITICAL
+"Requesting food supply for the flood camp in the school",food,MEDIUM
+"Help! Water is coming inside fast and my mother is in a wheelchair",rescue,CRITICAL
+"The water from the tank is contaminated, we need safe water",water,MEDIUM
+"Our thatched house was destroyed, 2 kids with us, need somewhere to stay",shelter,MEDIUM
+"A child has a deep cut on his head from falling debris",medical,CRITICAL
+"Some bread and milk for the kids would help",food,MEDIUM
+"Three fishermen missing since the boat capsized",rescue,CRITICAL
+"My brother is epileptic and ran out of his tablets",medical,HIGH
+"Nothing to eat at home and shops are closed, 4 people",food,MEDIUM
+"Someone is lying unconscious on the road near the bus stop",medical,CRITICAL
+"No roof over our heads after the storm",shelter,MEDIUM
+"We are thirsty, please bring water",water,HIGH
+"My neighbour is 90 and alone, water entered his house this morning",rescue,CRITICAL
+"मेरी मां को सांस लेने में तकलीफ है",medical,CRITICAL
+"हम 10 लोग छत पर हैं, बचाओ",rescue,CRITICAL
+"बच्चों के लिए दूध चाहिए",food,MEDIUM
+"हमारा घर गिर गया है, कंबल और रहने की जगह चाहिए",shelter,MEDIUM
+"என் தாத்தா மயக்கம் அடைந்தார், ஆம்புலன்ஸ் வேண்டும்",medical,CRITICAL
+"படகு அனுப்புங்கள், 5 பேர் மாட்டிக்கொண்டோம்",rescue,CRITICAL
+"சாப்பாடு இல்லை, 12 பேர் இருக்கிறோம்",food,MEDIUM
+"குடிக்க தண்ணீர் வேண்டும்",water,MEDIUM
+"paani ghar mein ghus gaya hai, 3 log phanse hain",rescue,CRITICAL
+"bukhar hai, dawai chahiye",medical,HIGH
+"Please rescue my dog, he is stuck on the balcony",rescue,MEDIUM
+"We need sanitary supplies and toothpaste",other,LOW

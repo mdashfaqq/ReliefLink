@@ -1,0 +1,61 @@
+text,category,level
+"Water has entered the house up to our chest, we are 4 people, please send a boat",rescue,CRITICAL
+"My mother is having chest pain and sweating, roads are blocked",medical,CRITICAL
+"We have not had food for two days, 6 of us including kids",food,HIGH
+"Need drinking water for our apartment, around 20 residents",water,MEDIUM
+"Our roof is leaking and we need a tarpaulin and blankets",shelter,LOW
+"A man was swept away by the current near the bridge",rescue,CRITICAL
+"Baby has high fever since last night, no medicine left",medical,HIGH
+"Please send food packets to the relief camp, 100 people",food,MEDIUM
+"Elderly couple stuck on the first floor, cannot walk, water rising",rescue,CRITICAL
+"We need clean water, the tap water is muddy",water,MEDIUM
+"Family of 3 lost their house, need shelter tonight",shelter,MEDIUM
+"Pregnant lady with labour pain, need ambulance immediately",medical,CRITICAL
+"Kids are hungry, need milk and biscuits",food,MEDIUM
+"Trapped in the car, water at door level, cannot open the door",rescue,CRITICAL
+"Need insulin for my diabetic father, stock finished",medical,HIGH
+"No food since morning for 15 workers at the site",food,MEDIUM
+"Person bleeding heavily from a leg injury, glass cut",medical,CRITICAL
+"We are safe but need a place to stay, our hut is gone",shelter,MEDIUM
+"Thirsty, no drinking water for 2 days, 10 people",water,HIGH
+"Old woman bedridden alone on ground floor, water entering",rescue,CRITICAL
+"Please arrange blankets for 30 people in the school",shelter,LOW
+"Dialysis patient needs to reach hospital today",medical,HIGH
+"Rescue needed, we are 8 people on the terrace",rescue,CRITICAL
+"My son fainted after vomiting many times",medical,CRITICAL
+"Need rice and dal for 5 families",food,MEDIUM
+"Water bottles needed for the old age home",water,MEDIUM
+"Snakebite victim, 12 year old boy, need anti venom",medical,CRITICAL
+"Our street is flooded, we cannot go out, need food",food,MEDIUM
+"Stuck on the bus, water rising, 20 passengers",rescue,CRITICAL
+"House collapsed, family needs somewhere to sleep",shelter,MEDIUM
+"मेरे पिता बेहोश हो गए हैं, डॉक्टर चाहिए",medical,CRITICAL
+"हमें खाना चाहिए, 3 दिन से भूखे हैं, 7 लोग",food,HIGH
+"पीने का पानी नहीं है, 12 लोग हैं",water,MEDIUM
+"हम घर में फंसे हैं, पानी बढ़ रहा है, बचाओ",rescue,CRITICAL
+"घर गिर गया, रहने की जगह चाहिए",shelter,MEDIUM
+"बच्चे को तेज बुखार है, दवाई चाहिए",medical,HIGH
+"hum 4 log phanse hain, bachao, paani bahut hai",rescue,CRITICAL
+"khana nahi mila, bhookh lagi hai, 5 log",food,MEDIUM
+"என் அம்மா மயக்கம் அடைந்துவிட்டார், மருத்துவர் வேண்டும்",medical,CRITICAL
+"வீட்டில் சிக்கி இருக்கிறோம், தண்ணீர் ஏறுகிறது, காப்பாற்றுங்கள்",rescue,CRITICAL
+"குடிநீர் இல்லை, 20 பேர் இருக்கிறோம்",water,MEDIUM
+"பசியாக இருக்கிறோம், உணவு வேண்டும், குழந்தைகள் இருக்கிறார்கள்",food,HIGH
+"வீடு இடிந்து விட்டது, தங்க இடம் வேண்டும்",shelter,MEDIUM
+"குழந்தைக்கு காய்ச்சல், மருந்து தேவை",medical,HIGH
+"thanni illa, kudineer venum, 8 per",water,MEDIUM
+"saapadu venum, 6 per irukkom",food,MEDIUM
+"Need medicines for BP and sugar for an old man",medical,HIGH
+"Can someone check on my grandparents? They are not answering the phone and water is rising in their area",rescue,HIGH
+"Our generator is out and my father is on oxygen support",medical,CRITICAL
+"The relief camp has run out of drinking water",water,HIGH
+"Two dogs trapped on a car roof",rescue,MEDIUM
+"We need sanitary pads and soap at the camp",other,LOW
+"Please send a boat, my neighbours can't get out",rescue,CRITICAL
+"Wall fell on a boy, he is injured",medical,CRITICAL
+"We lost our home and documents, need a place to stay",shelter,MEDIUM
+"Asthma patient having difficulty breathing, inhaler finished",medical,CRITICAL
+"Need tent for 4 families",shelter,LOW
+"We are fine, just need some drinking water",water,MEDIUM
+"Flood water entered the ground floor, we moved upstairs, need food",food,MEDIUM
+"Electric pole fell into the water near houses",rescue,CRITICAL

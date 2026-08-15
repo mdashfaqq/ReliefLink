@@ -1,0 +1,3 @@
+# Optional: semantic triage layer (multilingual sentence embeddings).
+# Enable with USE_EMBEDDINGS=1. Downloads a ~470 MB model on first use.
+sentence-transformers>=2.7
