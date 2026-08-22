@@ -6,3 +6,5 @@ All notable changes to ReliefLink are documented here.
 
 - **2026-08-21**: feat: implement cross-script character n-gram duplicate detection
 
+- **2026-08-22**: feat: integrate Hungarian algorithm for optimal volunteer assignment
+
