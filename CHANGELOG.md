@@ -10,3 +10,5 @@ All notable changes to ReliefLink are documented here.
 
 - **2026-08-23**: feat: add SMS gateway endpoint for low-bandwidth basic phone intake
 
+- **2026-08-24**: perf: optimize spatial proximity clustering and distance metrics
+
