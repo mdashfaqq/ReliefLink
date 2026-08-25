@@ -12,3 +12,5 @@ All notable changes to ReliefLink are documented here.
 
 - **2026-08-24**: perf: optimize spatial proximity clustering and distance metrics
 
+- **2026-08-25**: test: add unit and integration test suites for triage scoring logic
+
