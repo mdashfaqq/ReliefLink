@@ -14,3 +14,5 @@ All notable changes to ReliefLink are documented here.
 
 - **2026-08-25**: test: add unit and integration test suites for triage scoring logic
 
+- **2026-08-27**: fix: resolve edge cases in romanized script transliteration and entities
+
