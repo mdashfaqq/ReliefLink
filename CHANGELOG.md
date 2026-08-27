@@ -16,3 +16,5 @@ All notable changes to ReliefLink are documented here.
 
 - **2026-08-27**: fix: resolve edge cases in romanized script transliteration and entities
 
+- **2026-08-27**: docs: clarify API specification, benchmark evaluation, and setup guide
+
