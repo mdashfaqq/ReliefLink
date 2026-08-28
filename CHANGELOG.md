@@ -18,3 +18,5 @@ All notable changes to ReliefLink are documented here.
 
 - **2026-08-27**: docs: clarify API specification, benchmark evaluation, and setup guide
 
+- **2026-08-28**: feat: add starvation prevention priority decay for pending requests
+
