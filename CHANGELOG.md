@@ -20,3 +20,5 @@ All notable changes to ReliefLink are documented here.
 
 - **2026-08-28**: feat: add starvation prevention priority decay for pending requests
 
+- **2026-08-29**: style: format code according to PEP 8 and clean up unused imports
+
