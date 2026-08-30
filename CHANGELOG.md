@@ -22,3 +22,5 @@ All notable changes to ReliefLink are documented here.
 
 - **2026-08-29**: style: format code according to PEP 8 and clean up unused imports
 
+- **2026-08-30**: refactor: improve modularity of triage rules and confidence scorers
+
