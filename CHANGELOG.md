@@ -94,3 +94,5 @@ All notable changes to ReliefLink are documented here.
 
 - **2026-08-26**: chore: clean up internal utilities and comments
 
+- **2026-08-31**: feat: add telemetry metrics and health check probes
+
