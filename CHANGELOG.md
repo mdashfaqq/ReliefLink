@@ -24,3 +24,5 @@ All notable changes to ReliefLink are documented here.
 
 - **2026-08-30**: refactor: improve modularity of triage rules and confidence scorers
 
+- **2026-08-31**: ci: configure automated test workflows and linting checks
+
