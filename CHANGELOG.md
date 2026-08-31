@@ -26,3 +26,5 @@ All notable changes to ReliefLink are documented here.
 
 - **2026-08-31**: ci: configure automated test workflows and linting checks
 
+- **2026-08-31**: feat: implement real-time coordinate validation and dispatch routing
+
