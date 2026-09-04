@@ -112,3 +112,5 @@ All notable changes to ReliefLink are documented here.
 
 - **2026-09-04**: docs: update parameter descriptions in documentation
 
+- **2026-09-04**: style: format code according to style conventions
+
