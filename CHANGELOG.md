@@ -118,3 +118,5 @@ All notable changes to ReliefLink are documented here.
 
 - **2026-09-05**: style: format code according to style conventions
 
+- **2026-09-05**: feat: add telemetry metrics and health check probes
+
