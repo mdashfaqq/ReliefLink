@@ -120,3 +120,5 @@ All notable changes to ReliefLink are documented here.
 
 - **2026-09-05**: feat: add telemetry metrics and health check probes
 
+- **2026-09-07**: docs: update parameter descriptions in documentation
+
