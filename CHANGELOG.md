@@ -136,3 +136,5 @@ All notable changes to ReliefLink are documented here.
 
 - **2026-09-09**: test: add unit tests for priority scoring
 
+- **2026-09-10**: chore: clean up internal utilities and comments
+
