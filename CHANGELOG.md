@@ -138,3 +138,5 @@ All notable changes to ReliefLink are documented here.
 
 - **2026-09-10**: chore: clean up internal utilities and comments
 
+- **2026-09-11**: fix: validate boundary conditions on input fields
+
