@@ -140,3 +140,5 @@ All notable changes to ReliefLink are documented here.
 
 - **2026-09-11**: fix: validate boundary conditions on input fields
 
+- **2026-09-12**: refactor: modularize request handler logic
+
