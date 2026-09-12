@@ -142,3 +142,5 @@ All notable changes to ReliefLink are documented here.
 
 - **2026-09-12**: refactor: modularize request handler logic
 
+- **2026-09-12**: feat: add telemetry metrics and health check probes
+
