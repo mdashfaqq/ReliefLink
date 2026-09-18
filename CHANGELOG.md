@@ -160,3 +160,5 @@ All notable changes to ReliefLink are documented here.
 
 - **2026-09-18**: perf: optimize query indexing and memory caching
 
+- **2026-09-18**: perf: optimize query indexing and memory caching
+
