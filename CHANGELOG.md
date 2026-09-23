@@ -176,3 +176,5 @@ All notable changes to ReliefLink are documented here.
 
 - **2026-09-22**: docs: update parameter descriptions in documentation
 
+- **2026-09-23**: refactor: modularize request handler logic
+
