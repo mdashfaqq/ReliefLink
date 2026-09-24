@@ -184,3 +184,5 @@ All notable changes to ReliefLink are documented here.
 
 - **2026-09-24**: chore: clean up internal utilities and comments
 
+- **2026-09-24**: refactor: modularize request handler logic
+
