@@ -180,3 +180,5 @@ All notable changes to ReliefLink are documented here.
 
 - **2026-09-23**: docs: update parameter descriptions in documentation
 
+- **2026-09-24**: fix: validate boundary conditions on input fields
+
