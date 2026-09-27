@@ -188,3 +188,5 @@ All notable changes to ReliefLink are documented here.
 
 - **2026-09-25**: style: format code according to style conventions
 
+- **2026-09-27**: test: add unit tests for priority scoring
+
