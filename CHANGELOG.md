@@ -192,3 +192,5 @@ All notable changes to ReliefLink are documented here.
 
 - **2026-09-27**: docs: update parameter descriptions in documentation
 
+- **2026-09-28**: chore: clean up internal utilities and comments
+
