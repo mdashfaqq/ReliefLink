@@ -4,58 +4,276 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ReliefLink · Coordinator Dashboard</title>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/vendor/leaflet/leaflet.css" />
 <style>
   :root {
-    --bg: #0b1220; --panel: #121a2b; --panel2: #1a2438; --text: #e6ecf5; --muted: #8b98ad;
-    --line: #26324a; --accent: #3b82f6;
-    --CRITICAL: #ef4444; --HIGH: #f97316; --MEDIUM: #eab308; --LOW: #22c55e;
+    --bg: #070d18;
+    --panel: rgba(15, 23, 42, 0.75);
+    --panel-solid: #0f172a;
+    --panel2: rgba(30, 41, 59, 0.65);
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+    --line: rgba(255, 255, 255, 0.08);
+    --accent: #3b82f6;
+    --accent-glow: rgba(59, 130, 246, 0.3);
+    --CRITICAL: #ef4444;
+    --HIGH: #f97316;
+    --MEDIUM: #eab308;
+    --LOW: #22c55e;
   }
   * { box-sizing: border-box; }
-  body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, sans-serif; background: var(--bg); color: var(--text); }
-  header { display: flex; align-items: center; justify-content: space-between; gap: 12px;
-           padding: 12px 18px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
-  h1 { font-size: 18px; margin: 0; } h1 span { color: var(--accent); }
-  .sub { color: var(--muted); font-size: 12px; }
-  button { font: inherit; border: 0; border-radius: 8px; padding: 8px 14px; cursor: pointer;
-           background: var(--panel2); color: var(--text); }
-  button.primary { background: var(--accent); color: #fff; font-weight: 600; }
-  button:disabled { opacity: .5; cursor: default; }
-  .layout { display: grid; grid-template-columns: 400px 1fr; height: calc(100vh - 58px); }
-  aside { overflow-y: auto; border-right: 1px solid var(--line); padding: 14px; }
-  #map { height: 100%; }
-  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 14px; }
-  .stat { background: var(--panel); border-radius: 10px; padding: 10px; text-align: center; }
-  .stat b { display: block; font-size: 20px; }
-  .stat small { color: var(--muted); font-size: 11px; }
-  .stat.crit b { color: var(--CRITICAL); }
-  section { background: var(--panel); border-radius: 12px; padding: 12px; margin-bottom: 14px; }
-  section h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 10px; }
-  textarea, input { width: 100%; font: inherit; background: var(--panel2); color: var(--text);
-                    border: 1px solid var(--line); border-radius: 8px; padding: 8px; }
-  textarea { resize: vertical; min-height: 64px; }
-  .row { display: flex; gap: 8px; margin-top: 8px; align-items: center; }
-  .preview { font-size: 12px; color: var(--muted); margin-top: 6px; min-height: 16px; }
-  .badge { display: inline-block; padding: 1px 7px; border-radius: 999px; font-size: 11px; font-weight: 700; color: #111; }
-  .req { border-left: 4px solid var(--line); background: var(--panel2); border-radius: 8px; padding: 9px 10px; margin-bottom: 8px; cursor: pointer; }
-  .req:hover { outline: 1px solid var(--line); }
-  .req .top { display: flex; justify-content: space-between; align-items: center; gap: 6px; font-size: 12px; }
-  .req p { margin: 6px 0; font-size: 13px; line-height: 1.35; }
-  .req .why { font-size: 11px; color: var(--muted); }
-  .req .meta { font-size: 11px; color: var(--muted); display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
-  .req.assigned { opacity: .75; } .req.resolved { opacity: .4; }
-  .review { background: #7c3aed; color: #fff; }
-  .reviewbox { display: flex; gap: 6px; margin-top: 6px; }
-  .reviewbox select { font: inherit; font-size: 12px; background: var(--panel); color: var(--text); border: 1px solid var(--line); border-radius: 6px; }
-  .compare { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 4px 8px; font-size: 12px; }
-  .compare .h { color: var(--muted); } .compare .win { color: var(--LOW); font-weight: 700; }
-  .filters { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
-  .filters button { padding: 4px 10px; font-size: 12px; }
-  .filters button.on { background: var(--accent); color: #fff; }
-  .toast { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); background: var(--panel2);
-           border: 1px solid var(--line); padding: 10px 16px; border-radius: 10px; display: none; z-index: 1000; }
-  .legend { background: var(--panel); color: var(--text); padding: 8px 10px; border-radius: 8px; font-size: 12px; line-height: 1.7; }
-  .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+  body {
+    margin: 0;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow: hidden;
+  }
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 24px;
+    background: rgba(11, 18, 32, 0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--line);
+    flex-wrap: wrap;
+    z-index: 100;
+    position: relative;
+  }
+  h1 {
+    font-size: 20px;
+    font-weight: 800;
+    margin: 0;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  h1 span {
+    background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .live-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #22c55e;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 8px #22c55e;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+  }
+  .sub { color: var(--muted); font-size: 12px; font-weight: 500; }
+  button {
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 9px 16px;
+    cursor: pointer;
+    background: var(--panel2);
+    color: var(--text);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  button:hover:not(:disabled) {
+    background: rgba(51, 65, 85, 0.8);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  button:active:not(:disabled) {
+    transform: translateY(0);
+  }
+  button.primary {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 14px var(--accent-glow);
+  }
+  button.primary:hover:not(:disabled) {
+    background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+  }
+  button:disabled { opacity: 0.4; cursor: not-allowed; }
+  .layout { display: grid; grid-template-columns: 420px 1fr; height: calc(100vh - 65px); }
+  aside {
+    overflow-y: auto;
+    border-right: 1px solid var(--line);
+    padding: 16px;
+    background: rgba(11, 18, 32, 0.5);
+    backdrop-filter: blur(8px);
+  }
+  aside::-webkit-scrollbar { width: 6px; }
+  aside::-webkit-scrollbar-track { background: transparent; }
+  aside::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 99px; }
+  aside::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
+  #map { height: 100%; background: #141d2b; transition: background 0.3s ease; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 16px; }
+  .stat {
+    background: var(--panel);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 12px 8px;
+    text-align: center;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+  .stat:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+  .stat b { display: block; font-size: 22px; font-weight: 800; letter-spacing: -0.03em; color: #fff; }
+  .stat small { color: var(--muted); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+  .stat.crit b { color: var(--CRITICAL); text-shadow: 0 0 12px rgba(239, 68, 68, 0.3); }
+  section {
+    background: var(--panel);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+  section h2 {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 0 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  textarea, input {
+    width: 100%;
+    font: inherit;
+    font-size: 13px;
+    background: var(--panel2);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px 12px;
+    transition: all 0.2s ease;
+  }
+  textarea:focus, input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+    background: rgba(30, 41, 59, 0.9);
+  }
+  textarea { resize: vertical; min-height: 72px; }
+  .row { display: flex; gap: 10px; margin-top: 10px; align-items: center; }
+  .preview {
+    font-size: 12px;
+    color: #60a5fa;
+    margin-top: 8px;
+    min-height: 18px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #0f172a;
+    letter-spacing: 0.02em;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
+  .req {
+    border-left: 4px solid var(--line);
+    background: var(--panel2);
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-top: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    transition: all 0.2s ease;
+  }
+  .req:hover {
+    transform: translateX(3px);
+    background: rgba(30, 41, 59, 0.95);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  }
+  .req .top { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 12px; }
+  .req p { margin: 8px 0; font-size: 13.5px; line-height: 1.4; color: #f8fafc; font-weight: 500; }
+  .req .why { font-size: 11px; color: var(--muted); font-weight: 500; }
+  .req .meta { font-size: 11px; color: var(--muted); display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; font-weight: 500; }
+  .req.assigned { opacity: 0.8; }
+  .req.resolved { opacity: 0.45; }
+  .review { background: #8b5cf6; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
+  .reviewbox { display: flex; gap: 8px; margin-top: 10px; align-items: center; }
+  .reviewbox select {
+    font: inherit;
+    font-size: 12px;
+    background: var(--panel-solid);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 4px 8px;
+  }
+  .compare { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 6px 10px; font-size: 12px; font-weight: 500; }
+  .compare .h { color: var(--muted); font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 0.04em; }
+  .compare .win { color: var(--LOW); font-weight: 700; text-shadow: 0 0 8px rgba(34, 197, 94, 0.3); }
+  .filters { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+  .filters button { padding: 5px 12px; font-size: 12px; border-radius: 8px; }
+  .filters button.on {
+    background: var(--accent);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 8px var(--accent-glow);
+  }
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--accent);
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    display: none;
+    z-index: 1000;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    animation: fadeInUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translate(-50%, 12px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+  }
+  .legend {
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    color: var(--text);
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.8;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+  .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; vertical-align: middle; box-shadow: 0 0 6px rgba(0,0,0,0.3); }
   @media (max-width: 860px) {
     .layout { grid-template-columns: 1fr; grid-template-rows: 50vh auto; height: auto; }
     #map { height: 50vh; grid-row: 1; } aside { grid-row: 2; border-right: 0; }
@@ -65,7 +283,7 @@
 <body>
 <header>
   <div>
-    <h1>Relief<span>Link</span></h1>
+    <h1><span class="live-dot"></span>Relief<span>Link</span></h1>
     <div class="sub">AI-assisted disaster relief coordination</div>
   </div>
   <div class="row" style="margin:0">
@@ -114,28 +332,116 @@
 </div>
 <div class="toast" id="toast"></div>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="/static/vendor/leaflet/leaflet.js"></script>
 <script>
 const $ = (id) => document.getElementById(id);
 const COLORS = { CRITICAL: "#ef4444", HIGH: "#f97316", MEDIUM: "#eab308", LOW: "#22c55e" };
 const ICONS = { rescue: "🛟", medical: "🩺", water: "💧", food: "🍚", shelter: "🏠", other: "❗" };
 let filter = "open", pickedLoc = null, requests = [];
 
-const map = L.map("map").setView([13.0, 80.21], 11);
-L.tileLayer("https://{s}.basemap.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
-  attribution: "&copy; OpenStreetMap &copy; CARTO", maxZoom: 19,
-}).addTo(map);
-const layers = { req: L.layerGroup().addTo(map), vol: L.layerGroup().addTo(map), lines: L.layerGroup().addTo(map), pick: L.layerGroup().addTo(map) };
+let map = null;
+let layers = {};
 const markers = {};
+let isFirstLoad = true;
 
-const legend = L.control({ position: "bottomright" });
-legend.onAdd = () => {
-  const d = L.DomUtil.create("div", "legend");
-  d.innerHTML = Object.entries(COLORS).map(([k, c]) => `<span class="dot" style="background:${c}"></span>${k}`).join("<br>")
-    + '<br><span class="dot" style="background:#3b82f6;border-radius:2px"></span>Volunteer';
-  return d;
-};
-legend.addTo(map);
+if (typeof L === "undefined") {
+  const mapEl = $("map");
+  if (mapEl) {
+    mapEl.style.display = "flex";
+    mapEl.style.alignItems = "center";
+    mapEl.style.justifyContent = "center";
+    mapEl.style.padding = "20px";
+    mapEl.style.color = "var(--muted)";
+    mapEl.style.textAlign = "center";
+    mapEl.innerHTML = `<div style="background:var(--panel);padding:24px;border-radius:12px;border:1px solid var(--line);max-width:360px">
+      <h3 style="margin:0 0 8px;color:var(--text);font-size:16px">Map Unavailable</h3>
+      <p style="margin:0;font-size:13px;line-height:1.4">Leaflet mapping library could not be loaded. Request triage, dispatching, and management features remain fully functional.</p>
+    </div>`;
+  }
+} else {
+  const mapEl = $("map");
+  if (mapEl) mapEl.style.background = "#141d2b";
+  map = L.map("map").setView([13.0, 80.21], 11);
+
+  const cartoUrl = "https://{s}.basemap.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png";
+  const cartoAttr = "&copy; OpenStreetMap &copy; CARTO";
+  const osmUrl = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
+  const osmAttr = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+
+  let currentTileLayer = null;
+  let tileFailures = 0;
+  let tileSuccesses = 0;
+  let fallbackTriggered = false;
+  let fallbackTimer = null;
+
+  function switchToOsm() {
+    if (fallbackTriggered) return;
+    fallbackTriggered = true;
+    if (fallbackTimer) clearTimeout(fallbackTimer);
+    if (currentTileLayer && map) map.removeLayer(currentTileLayer);
+    if (mapEl) mapEl.style.background = "#f2efe9";
+    currentTileLayer = L.tileLayer(osmUrl, { attribution: osmAttr, maxZoom: 19 });
+    if (map) currentTileLayer.addTo(map);
+  }
+
+  currentTileLayer = L.tileLayer(cartoUrl, { attribution: cartoAttr, maxZoom: 19 });
+  currentTileLayer.on("tileerror", () => {
+    if (fallbackTriggered) return;
+    tileFailures++;
+    if (tileSuccesses === 0 && tileFailures >= 3) {
+      switchToOsm();
+    }
+  });
+  currentTileLayer.on("tileload", () => {
+    if (fallbackTriggered) return;
+    tileSuccesses++;
+    if (fallbackTimer) {
+      clearTimeout(fallbackTimer);
+      fallbackTimer = null;
+    }
+  });
+  currentTileLayer.addTo(map);
+
+  fallbackTimer = setTimeout(() => {
+    if (!fallbackTriggered && tileSuccesses === 0) {
+      switchToOsm();
+    }
+  }, 6000);
+
+  layers = {
+    req: L.layerGroup().addTo(map),
+    vol: L.layerGroup().addTo(map),
+    lines: L.layerGroup().addTo(map),
+    pick: L.layerGroup().addTo(map)
+  };
+
+  const legend = L.control({ position: "bottomright" });
+  legend.onAdd = () => {
+    const d = L.DomUtil.create("div", "legend");
+    d.innerHTML = Object.entries(COLORS).map(([k, c]) => `<span class="dot" style="background:${c}"></span>${k}`).join("<br>")
+      + '<br><span class="dot" style="background:#3b82f6;border-radius:2px"></span>Volunteer';
+    return d;
+  };
+  legend.addTo(map);
+
+  map.on("click", (e) => {
+    pickedLoc = e.latlng;
+    if (layers.pick) layers.pick.clearLayers();
+    L.marker(e.latlng).addTo(layers.pick);
+    $("loc").value = `${e.latlng.lat.toFixed(4)}, ${e.latlng.lng.toFixed(4)}`;
+    $("submitBtn").disabled = !$("text").value.trim();
+  });
+}
+
+function fitMapToBounds() {
+  if (typeof L === "undefined" || !map) return;
+  const activeLatLngs = requests
+    .filter((r) => r.status !== "resolved" && r.lat != null && r.lon != null)
+    .map((r) => [r.lat, r.lon]);
+  if (activeLatLngs.length > 0) {
+    map.fitBounds(activeLatLngs, { padding: [40, 40], maxZoom: 14 });
+  }
+}
 
 function toast(msg) { const t = $("toast"); t.textContent = msg; t.style.display = "block"; clearTimeout(t._h); t._h = setTimeout(() => t.style.display = "none", 3500); }
 async function api(path, opts = {}) {
@@ -163,7 +469,6 @@ function renderList() {
                 el("span", null, `🕒 ${ago(r.created_at)}`), el("span", null, r.source), el("span", null, r.status));
     card.append(top, el("p", null, r.text), why, meta);
     if (r.needs_review && r.status !== "resolved") {
-      // Human-in-the-loop: the coordinator confirms or corrects the AI's guess.
       const box = el("div", "reviewbox");
       const sel = el("select");
       for (const c of ["rescue", "medical", "water", "food", "shelter", "other"]) {
@@ -187,13 +492,20 @@ function renderList() {
       btn.onclick = async (e) => { e.stopPropagation(); await api(`/api/requests/${r.id}/resolve`, { method: "POST" }); refresh(); };
       card.append(btn);
     }
-    card.onclick = () => { map.setView([r.lat, r.lon], 15); markers[r.id]?.openPopup(); };
+    card.onclick = () => {
+      if (typeof L !== "undefined" && map) {
+        map.setView([r.lat, r.lon], 15);
+        markers[r.id]?.openPopup();
+      }
+    };
     list.append(card);
   }
 }
 
 function renderMap(vols, assigns) {
+  if (typeof L === "undefined" || !map || !layers.req) return;
   layers.req.clearLayers(); layers.vol.clearLayers(); layers.lines.clearLayers();
+  for (const k in markers) delete markers[k];
   for (const r of requests) {
     if (r.status === "resolved") continue;
     const m = L.circleMarker([r.lat, r.lon], {
@@ -236,6 +548,10 @@ async function refresh() {
     $("reviewNote").textContent = stats.needs_review ? `${stats.needs_review} request(s) need human review, marked REVIEW below` : "";
     renderList(); renderMap(vols, assigns);
     if (stats.open && vols.length) renderCompare(cmp);
+    if (isFirstLoad) {
+      isFirstLoad = false;
+      fitMapToBounds();
+    }
   } catch (e) { console.error(e); }
 }
 
@@ -245,13 +561,6 @@ $("filters").onclick = (e) => {
   [...$("filters").children].forEach((b) => b.classList.toggle("on", b === e.target));
   renderList();
 };
-
-map.on("click", (e) => {
-  pickedLoc = e.latlng; layers.pick.clearLayers();
-  L.marker(e.latlng).addTo(layers.pick);
-  $("loc").value = `${e.latlng.lat.toFixed(4)}, ${e.latlng.lng.toFixed(4)}`;
-  $("submitBtn").disabled = !$("text").value.trim();
-});
 
 let previewTimer;
 $("text").addEventListener("input", () => {
@@ -270,7 +579,7 @@ $("submitBtn").onclick = async () => {
     const res = await api("/api/requests", { method: "POST", body: JSON.stringify({ text: $("text").value, lat: pickedLoc.lat, lon: pickedLoc.lng }) });
     toast(res.duplicate_of ? `Merged into existing incident #${res.duplicate_of}` : `Request #${res.request.id} created: ${res.request.level}`);
     $("text").value = ""; $("preview").textContent = ""; $("loc").value = ""; pickedLoc = null;
-    layers.pick.clearLayers(); $("submitBtn").disabled = true; refresh();
+    if (layers.pick) layers.pick.clearLayers(); $("submitBtn").disabled = true; refresh();
   } catch (e) { toast("Error: " + e.message); }
 };
 
@@ -278,7 +587,8 @@ $("seedBtn").onclick = async () => {
   if (!confirm("This resets all data and loads the Chennai flood demo. Continue?")) return;
   const r = await api("/api/demo/seed", { method: "POST" });
   toast(`Loaded ${r.requests} messages → ${r.duplicates_merged} duplicates merged, ${r.volunteers} volunteers`);
-  map.setView([13.0, 80.21], 11); refresh();
+  await refresh();
+  fitMapToBounds();
 };
 
 $("dispatchBtn").onclick = async () => {
