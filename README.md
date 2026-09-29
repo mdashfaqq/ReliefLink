@@ -2,7 +2,9 @@
 
 **AI-assisted coordination for disaster relief: triage help requests in English, Hindi and Tamil, merge duplicate reports, and dispatch volunteers optimally.**
 
-![Python](https://img.shields.io/badge/python-3.11-blue) ![FastAPI](https://img.shields.io/badge/FastAPI-backend-009688) ![Tests](https://img.shields.io/badge/tests-34%20passing-brightgreen) ![License](https://img.shields.io/badge/license-MIT-lightgrey)
+![Python](https://img.shields.io/badge/python-3.11-blue) ![FastAPI](https://img.shields.io/badge/FastAPI-backend-009688) ![Tests](https://img.shields.io/badge/tests-34%20passing-brightgreen) ![License](https://img.shields.io/badge/license-MIT-lightgrey) ![Live Demo](https://img.shields.io/badge/Live%20Demo-Railway-000000?style=flat&logo=railway)
+
+🚀 **Live App**: [https://relieflink-app.up.railway.app/](https://relieflink-app.up.railway.app/)
 
 ---
 
